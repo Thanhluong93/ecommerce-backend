@@ -11,7 +11,7 @@ const app = express();
 app.use(cors({
   origin: [
     "http://localhost:3000", // để test local
-    "https://ecommerce-frontend-indol-sigma.vercel.app" // domain frontend trên Vercel của bạn
+    "https://ecommerce-frontend-indol-sigma.vercel.app" // domain frontend trên Vercel
   ]
 }));
 
@@ -20,18 +20,21 @@ app.use(express.json());
 // Sử dụng đường dẫn tuyệt đối để truy cập users.json
 const USERS_FILE = path.join(__dirname, "data", "users.json");
 
-// GET tất cả user
+// ✅ GET tất cả user
 app.get("/data/users", (req, res) => {
   const users = JSON.parse(fs.readFileSync(USERS_FILE, "utf8"));
   res.json(users);
 });
 
-// POST đăng nhập
+// ✅ POST đăng nhập
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
-  const users = JSON.parse(fs.readFileSync(USERS_FILE, "utf8"));
+  console.log("📩 Nhận yêu cầu đăng nhập:", email);
 
+  const users = JSON.parse(fs.readFileSync(USERS_FILE, "utf8"));
   const matchedUser = users.find(user => user.email === email);
+
+  console.log("🔍 Tìm thấy user:", matchedUser ? matchedUser.email : "Không tìm thấy");
 
   if (!matchedUser) {
     return res.status(401).json({ message: "Sai tài khoản hoặc mật khẩu!" });
@@ -40,18 +43,22 @@ app.post("/login", (req, res) => {
   // Kiểm tra mật khẩu
   bcrypt.compare(password, matchedUser.password, (err, isMatch) => {
     if (err) {
+      console.error("❌ Lỗi khi so sánh mật khẩu:", err);
       return res.status(500).json({ message: "Có lỗi xảy ra khi kiểm tra mật khẩu" });
     }
+
+    console.log("🔐 Kết quả so sánh mật khẩu:", isMatch);
 
     if (!isMatch) {
       return res.status(401).json({ message: "Sai tài khoản hoặc mật khẩu!" });
     }
 
+    console.log("✅ Đăng nhập thành công:", matchedUser.email);
     res.json(matchedUser);
   });
 });
 
-// PUT cập nhật thông tin user
+// ✅ PUT cập nhật thông tin user
 app.put("/data/users/:id", (req, res) => {
   const users = JSON.parse(fs.readFileSync(USERS_FILE, "utf8"));
   const id = parseInt(req.params.id);
@@ -66,7 +73,7 @@ app.put("/data/users/:id", (req, res) => {
   }
 });
 
-// POST đăng ký người dùng
+// ✅ POST đăng ký người dùng
 app.post("/register", [
   body("email").isEmail().withMessage("Email không hợp lệ"),
   body("password").isLength({ min: 6 }).withMessage("Mật khẩu phải có ít nhất 6 ký tự"),
@@ -99,9 +106,11 @@ app.post("/register", [
 
     users.push(newUser);
     fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
+    console.log("🆕 Đăng ký user mới:", email);
     res.status(201).json(newUser);
   });
 });
 
+// ✅ Khởi động server
 const PORT = 3002;
-app.listen(PORT, () => console.log(`✅ Backend chạy tại http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`✅ Backend đang chạy tại http://localhost:${PORT}`));
