@@ -26,7 +26,15 @@
     "id": 4,
     "name": "Thành Lương",
     "email": "thanhluongstore@gmail.com",
-    "phone": "6836688686",
-    "password": "$2b$10$RooNfUFM6X80bazf7sfT7e8WyoMsxAGDJcgddt6P2dKH9C4qIYAxC"
+    "phone": "4747747747777",
+    "password": "$2b$10$RooNfUFM6X80bazf7sfT7e8WyoMsxAGDJcgddt6P2dKH9C4qIYAxC",
+    "avatar": ""
+  },
+  {
+    "id": 5,
+    "name": "Thúy Vân",
+    "email": "thuyvan87@gmail.com",
+    "phone": "23424334225",
+    "password": "$2b$10$n4AjzdWs2aIHbbD0DktikecI16ZX.FD7SYt2BB1Zsibimp63Wb3h6"
   }
 ]
