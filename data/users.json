@@ -21,5 +21,19 @@
     "email": "luongf@gmail.com",
     "phone": "54545252",
     "password": "$2b$10$rhzw5g.IsM1wq66vBGJl.OEm0nbBgdNtexc7nkt8m.Rb9Bj5bOghq"
+  },
+  {
+    "id": 4,
+    "name": "Trần Anh",
+    "email": "trannh192@gmail.com",
+    "phone": "0190212383",
+    "password": "$2b$10$H/HtcZ9B7GR7FF4gtGfIT.3iw50pvYeaLGl4jSIl1CwIc0W6LHskW"
+  },
+  {
+    "id": 5,
+    "name": "Nguyễn Thảo Mai",
+    "email": "thaomai@gmail.com",
+    "phone": "8694586",
+    "password": "$2b$10$6ZkdKpApJb9zy4DCKiZbiODpu3flkXyjGcQbqwuj20gEYLEpD2U3y"
   }
 ]
