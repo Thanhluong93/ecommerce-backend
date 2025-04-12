@@ -2,11 +2,14 @@ const mongoose = require("mongoose");
 
 const connectDB = async () => {
   try {
-    await mongoose.connect("mongodb+srv://luong6011:qfcAjaDq15J4BuOv@cluster0.nblruqn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     console.log("✅ Kết nối MongoDB thành công");
   } catch (err) {
-    console.error("❌ Lỗi khi kết nối MongoDB:", err);
-    process.exit(1);
+    console.error("❌ Lỗi kết nối MongoDB:", err);
+    process.exit(1); // Dừng ứng dụng nếu không thể kết nối đến MongoDB
   }
 };
 
