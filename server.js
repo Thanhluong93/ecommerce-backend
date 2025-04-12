@@ -90,6 +90,10 @@ app.post("/register", [
   body("password").isLength({ min: 6 }).withMessage("Mật khẩu phải có ít nhất 6 ký tự"),
 ], async (req, res) => {
   const errors = validationResult(req);
+
+    // ✅ In ra dữ liệu nhận được từ frontend
+    console.log("📨 Dữ liệu nhận từ frontend:", req.body);
+
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
